@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/my_info"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/my_store"
+            android:title="My store "/>
+        <item
+            android:id="@+id/OrderList"
+            android:title="Order List" />
+        <item
+            android:id="@+id/Notification"
+            android:title="Notification " />
+    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/Contact_usin"
+                android:title="Contact us " />
+            <item
+                android:id="@+id/Logout"
+                android:title="Logout " />
+
+        </menu>
+    </item>
+
+</menu>
