@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "922253660794",
+    "firebase_url": "https://a-p-s-a-a.firebaseio.com",
+    "project_id": "a-p-s-a-a",
+    "storage_bucket": "a-p-s-a-a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922253660794:android:89b6e3f1b012215548e1c3",
+        "android_client_info": {
+          "package_name": "com.mrsoftit.apsaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922253660794-95ja6a5kc5g8hp797vh6bjehr5t1h7vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApq-dnV4TPmkRfCDvDfsaJPFmpK7RdkG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922253660794-95ja6a5kc5g8hp797vh6bjehr5t1h7vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
