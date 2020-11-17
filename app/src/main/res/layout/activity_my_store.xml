@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".product.MyStore">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_support"
             android:layout_width="match_parent"
-            app:titleTextColor="#000"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple_700"
             >
             <TextView
                 android:textSize="20sp"
@@ -38,11 +40,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="visible"
+            android:layout_below="@+id/productadd"
             android:id="@+id/product_info_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/product_text_view"
             android:text=" Product add"
             android:gravity="center"

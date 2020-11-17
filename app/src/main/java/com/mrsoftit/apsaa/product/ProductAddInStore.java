@@ -178,6 +178,7 @@ public class ProductAddInStore extends AppCompatActivity implements EasyPermissi
 
             }
         });
+
         ImageAdded3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

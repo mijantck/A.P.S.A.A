@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfile">
+    tools:context=".MyProfile"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_support"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="10dp"
+        android:background="@color/purple_700">
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:text="My profile "
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_gravity="center_horizontal"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/ic_person"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/profile_name"
+        android:layout_width="match_parent"
+        android:text="Name"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/profile_email"
+        android:layout_width="match_parent"
+        android:text="Email"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/profile_phone"
+        android:layout_width="match_parent"
+        android:text="Name"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
