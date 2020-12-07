@@ -15,43 +15,142 @@
         android:elevation="10dp"
         android:background="@color/purple_700">
 
-        <TextView
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:gravity="center"
-            android:text="My profile "
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:text="My profile "
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/profile_edite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_edit" />
+            <TextView
+                android:id="@+id/profile_save"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:background="@android:color/white"
+                android:textColor="@color/purple_700"
+                android:text="SAVE"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"/>
+
+        </RelativeLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_gravity="center_horizontal"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/ic_person"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_person"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
-    <TextView
-        android:textSize="20dp"
-        android:id="@+id/profile_name"
-        android:layout_width="match_parent"
-        android:text="Name"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textSize="20dp"
-        android:id="@+id/profile_email"
-        android:layout_width="match_parent"
-        android:text="Email"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textSize="20dp"
-        android:id="@+id/profile_phone"
-        android:layout_width="match_parent"
-        android:text="Name"
-        android:layout_height="wrap_content"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:baselineAlignBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/profile_image_edite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_add_photo_alternate" />
 
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:fontFamily="serif-monospace"
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/purple_700"
+            android:textSize="20dp" />
+        <TextView
+            android:gravity="center"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/purple_700"
+            android:textSize="20dp"
+            android:id="@+id/profile_email"
+            android:layout_width="match_parent"
+            android:text="Email"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/purple_700"
+            android:textSize="20dp"
+            android:id="@+id/profile_phone"
+            android:layout_width="match_parent"
+            android:text="Address"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_Name_Edite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Address"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_Adress_Edite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
 </LinearLayout>

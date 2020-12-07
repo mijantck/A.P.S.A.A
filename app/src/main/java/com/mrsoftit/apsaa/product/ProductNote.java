@@ -3,9 +3,17 @@ package com.mrsoftit.apsaa.product;
 public class ProductNote {
     String thisDucID;
     String name;
+    String categoryspinner;
+    String productQuantity;
+    String productType;
+    String productCulture;
+    String productColour;
+    String productMaterial;
+    String productCountryofOrigin;
     double price;
     String discription;
     String search;
+
 
     String i1;
     String i2;
@@ -15,12 +23,16 @@ public class ProductNote {
 
     public ProductNote(){}
 
-    public ProductNote(String thisDucID, String name,
-                       double price, String discription,
-                       String search,
-                       String i1, String i2, String i3, String i4, String i15) {
+    public ProductNote(String thisDucID, String name, String categoryspinner, String productQuantity, String productType, String productCulture, String productColour, String productMaterial, String productCountryofOrigin, double price, String discription, String search, String i1, String i2, String i3, String i4, String i15) {
         this.thisDucID = thisDucID;
         this.name = name;
+        this.categoryspinner = categoryspinner;
+        this.productQuantity = productQuantity;
+        this.productType = productType;
+        this.productCulture = productCulture;
+        this.productColour = productColour;
+        this.productMaterial = productMaterial;
+        this.productCountryofOrigin = productCountryofOrigin;
         this.price = price;
         this.discription = discription;
         this.search = search;
@@ -45,6 +57,63 @@ public class ProductNote {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getCategoryspinner() {
+        return categoryspinner;
+    }
+
+    public void setCategoryspinner(String categoryspinner) {
+        this.categoryspinner = categoryspinner;
+    }
+
+    public String getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public String getProductCulture() {
+        return productCulture;
+    }
+
+    public void setProductCulture(String productCulture) {
+        this.productCulture = productCulture;
+    }
+
+    public String getProductColour() {
+        return productColour;
+    }
+
+    public void setProductColour(String productColour) {
+        this.productColour = productColour;
+    }
+
+    public String getProductMaterial() {
+        return productMaterial;
+    }
+
+    public void setProductMaterial(String productMaterial) {
+        this.productMaterial = productMaterial;
+    }
+
+    public String getProductCountryofOrigin() {
+        return productCountryofOrigin;
+    }
+
+    public void setProductCountryofOrigin(String productCountryofOrigin) {
+        this.productCountryofOrigin = productCountryofOrigin;
     }
 
     public double getPrice() {

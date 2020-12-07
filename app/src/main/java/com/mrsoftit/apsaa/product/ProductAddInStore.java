@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,17 +15,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +33,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mrsoftit.apsaa.R;
 import com.squareup.picasso.Picasso;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONObject;
 
@@ -70,12 +69,20 @@ public class ProductAddInStore extends AppCompatActivity implements EasyPermissi
     CollectionReference userRef;
 
 
+    private SearchableSpinner Categoryspinner;
+    String Categoryspinneritem;
+    int CategoryspinneritemInt;
 
-
+    String[] CategoryspinnerList = {"Antiquities","Architectural & Garden","Asian Antiques","Decorative Arts","Ethnographic",
+                                    "Furniture","Home & Hearth","Incunabula","Lines & Textiles(re-130)","Manuscripts","Maps, Atlases & GLobes",
+                                    "Marcatile","Mercantile,Trades & Factories ","Musical Instruments(Pre-1930)","Periods and styles","Primitives ",
+                                    "Resstoretion & Care","Rugs & Carpets","Science & Medicine(Pre-1930)","Sewing (Pre-1930)","Silver",
+                                    "Reproduction Antiques","Other Antiques"};
 
     //input
     ImageView pruductImage,ImageAdded,ImageAdded1,ImageAdded2,ImageAdded3,ImageAdded4;
-    private TextInputEditText productName, productPrice,pruductDiscount;
+    private TextInputEditText productName, productPrice, pruductDiscription,productQuantity,productType,productCulture,productColour,
+            productMaterial,productCountryofOrigin,pruductPrice;
     private MaterialButton addProduct;
 
     //String
@@ -111,8 +118,15 @@ public class ProductAddInStore extends AppCompatActivity implements EasyPermissi
         userRef = db.collection("Users").document(currentUser.getUid()).collection("myProduct");
 
         productName = findViewById(R.id.productName);
+        productQuantity = findViewById(R.id.productQuantity);
+        productType = findViewById(R.id.productType);
+        productCulture = findViewById(R.id.productCulture);
+        productColour = findViewById(R.id.productColour);
+        productMaterial = findViewById(R.id.productMaterial);
+        productCountryofOrigin = findViewById(R.id.productCountryofOrigin);
+
         productPrice = findViewById(R.id.pruductPrice);
-        pruductDiscount = findViewById(R.id.pruductDiscount);
+        pruductDiscription = findViewById(R.id.pruductDiscription);
         addProduct = findViewById(R.id.addpruduct);
 
 
@@ -123,8 +137,90 @@ public class ProductAddInStore extends AppCompatActivity implements EasyPermissi
         ImageAdded3 = findViewById(R.id.ImageAdded3);
         ImageAdded4 = findViewById(R.id.ImageAdded4);
 
+        Categoryspinner = findViewById(R.id.Categoryspinner);
+
+
         final Bundle bundle = getIntent().getExtras();
 
+
+        ArrayAdapter CategoryspinnerarrayAdapter = new ArrayAdapter(ProductAddInStore.this,android.R.layout.simple_spinner_dropdown_item,CategoryspinnerList);
+        Categoryspinner.setAdapter(CategoryspinnerarrayAdapter);
+        Categoryspinner.setPrompt("Category");
+
+        Categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Categoryspinneritem = parent.getItemAtPosition(position).toString();
+
+                CategoryspinneritemInt = position;
+
+                Toast.makeText(ProductAddInStore.this, Categoryspinneritem+"", Toast.LENGTH_SHORT).show();
+
+               /* if (position<=3){
+                    comonCatagory = "Mobiles";
+                }
+                else if (position == 4){
+                    comonCatagory = "Foods";
+                }else if (position == 5){
+                    comonCatagory = "jewellery";
+
+                }else if (position == 6){
+                    comonCatagory = "Motorcycle accessories";
+
+                }else if ( position == 7){
+                    comonCatagory = "Girls";
+
+                }
+                else if (position == 8){
+                    comonCatagory = "Grocery";
+                } else if (position >=9 && position <=17){
+                    comonCatagory = "Mans";
+                }else if (position >=18 && position <=23){
+                    comonCatagory = "Girls";
+                }
+                else if (position ==24){
+
+                    comonCatagory = "kids";
+                }
+                else if (position ==25){
+
+                    comonCatagory = "medicine";
+                }
+                else if (position ==26){
+
+                    comonCatagory = "sports";
+                }
+                else if (position ==27){
+
+                    comonCatagory = "computer accessories";
+                }
+                else if (position ==28){
+
+                    comonCatagory = "home accessories";
+                }
+                else if (position ==29){
+
+                    comonCatagory = "books";
+                }
+                else if (position ==30){
+
+                    comonCatagory = "electronics";
+                }
+                else if (position ==31){
+
+                    comonCatagory = "game";
+                }
+*/
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        
         ImageAdded.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -466,11 +562,21 @@ public class ProductAddInStore extends AppCompatActivity implements EasyPermissi
         String price  = productPrice.getText().toString();
         double priceD = Double.parseDouble(price);
 
-        String discrition = pruductDiscount.getText().toString();
+        String discrition = pruductDiscription.getText().toString();
 
 
         Map<String, Object> city = new HashMap<>();
+
+
         city.put("name", name);
+       city.put("categoryspinner", Categoryspinneritem);
+        city.put("productQuantity", productQuantity.getText().toString());
+        city.put("productType", productType.getText().toString());
+        city.put("productCulture", productCulture.getText().toString());
+        city.put("productColour", productColour.getText().toString());
+        city.put("productMaterial", productMaterial.getText().toString());
+        city.put("productCountryofOrigin", productCountryofOrigin.getText().toString());
+
         city.put("thisDucID", null);
         city.put("price", priceD);
         city.put("discription", discrition);

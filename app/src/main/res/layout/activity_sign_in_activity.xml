@@ -12,7 +12,7 @@
         android:textSize="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A-S-A-A"
+        android:text="A-P-S-A-A"
         android:layout_marginBottom="100dp"
         android:textStyle="bold"
         />
