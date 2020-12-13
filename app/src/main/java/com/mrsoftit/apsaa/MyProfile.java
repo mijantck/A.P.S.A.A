@@ -179,7 +179,6 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
 
         } catch (Exception e){
             e.printStackTrace();
-
         }
 
     }
