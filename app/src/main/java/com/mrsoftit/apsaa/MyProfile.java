@@ -16,11 +16,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -56,12 +60,18 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
     ProgressDialog progressDialog;
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    CircleImageView profile_image,profile_image_edite;
+    CircleImageView profile_image,profile_image_edite,profile_edite_pan;
     TextView profile_name,profile_email,profile_phone;
     UserProfileChangeRequest profileUpdates;
 
     private static final int PICK_IMAGE_REQUEST = 1;
     public Uri mImageUri;
+
+    LinearLayout my_info_View,my_info_View_edite;
+
+    MaterialButton btn_MY_Profile_Update;
+    TextInputEditText profile_Name_Edite,profile_Adress_Edite;
+
 
 
 
@@ -77,27 +87,50 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
         profile_phone = findViewById(R.id.profile_phone);
         profile_image_edite = findViewById(R.id.profile_image_edite);
 
+        profile_edite_pan = findViewById(R.id.profile_edite_pan);
+
+        my_info_View = findViewById(R.id.my_info_View);
+        my_info_View_edite = findViewById(R.id.my_info_View_edite);
+
+        btn_MY_Profile_Update = findViewById(R.id.btn_MY_Profile_Update);
+
+        profile_Name_Edite = findViewById(R.id.profile_Name_Edite);
+        profile_Adress_Edite = findViewById(R.id.profile_Adress_Edite);
+
         Picasso.get().load(currentUser.getPhotoUrl().toString()).into(profile_image);
         profile_name.setText(currentUser.getDisplayName());
         profile_email.setText(currentUser.getEmail());
         profile_phone.setText(currentUser.getPhoneNumber()+"\n");
 
-        profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName("Jane Q. User")
-                .setPhotoUri(Uri.parse("https://i.imgur.com/n3z7c02.jpeg"))
-                .build();
-
-        currentUser.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MyProfile.this, "Sucsesfull", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
 
 
+
+        profile_edite_pan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MyProfile.this, "click", Toast.LENGTH_SHORT).show();
+                my_info_View.setVisibility(View.GONE);
+                profile_image.setVisibility(View.GONE);
+                my_info_View_edite.setVisibility(View.VISIBLE);
+                profile_image_edite.setVisibility(View.VISIBLE);
+            }
+        });
+        profile_image_edite.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                getimge_profile();
+
+            }
+        });
+
+        btn_MY_Profile_Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                uploadImageUri(mImageUri );
+            }
+        });
     }
 
 
@@ -119,7 +152,22 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
                 @Override
                 public void onSuccess(final String downloadLink) {
 
-                    Toast.makeText(MyProfile.this, downloadLink+"", Toast.LENGTH_SHORT).show();
+                    String Name = profile_Name_Edite.getText().toString();
+                    String Address = profile_Adress_Edite.getText().toString();
+                    profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(Name)
+                            .setPhotoUri(Uri.parse(downloadLink))
+                            .build();
+
+                    currentUser.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(MyProfile.this, "Sucsesfull", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
                 }
 
@@ -138,7 +186,7 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @AfterPermissionGranted(PICK_IMAGE_REQUEST)
-    private void getIMEGE() {
+    private void getimge_profile() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -231,9 +279,7 @@ public class MyProfile extends AppCompatActivity implements EasyPermissions.Perm
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             if (data.getData() != null) {
                     mImageUri = data.getData();
-                    Picasso.get().load(mImageUri).into(profile_image);
-
-
+                    Picasso.get().load(mImageUri).into(profile_image_edite);
 
             } else {
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,9 @@
 package com.mrsoftit.apsaa.product;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,14 +16,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.mrsoftit.apsaa.AddCard;
+import com.mrsoftit.apsaa.BuyNow;
 import com.mrsoftit.apsaa.MainActivity;
 import com.mrsoftit.apsaa.R;
 import com.mrsoftit.apsaa.SliderAdapterExamplepro;
 import com.mrsoftit.apsaa.SliderItem;
+import com.mrsoftit.apsaa.WatchList;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -39,8 +51,10 @@ public class FullProductView extends AppCompatActivity {
 
     ImageView mainimage,imageClick1,imageClick2,imageClick3,imageClick4,imageClick5;
 
+    CollectionReference GlobleSoplist = FirebaseFirestore.getInstance()
+            .collection("Product");
 
-
+    AllProductListAdapter allProductListAdapter;
 
     ProgressDialog progressDialog;
 
@@ -60,6 +74,9 @@ public class FullProductView extends AppCompatActivity {
     TextView reviewID;
 
     String name,price,descripton,i1,i2,i3,i4,i5;
+
+    MaterialButton btn_buy_now,btn_Add_to_cart,btn_add_to_watchlist;
+
 
 
     @Override
@@ -100,8 +117,6 @@ public class FullProductView extends AppCompatActivity {
         });
         productImageDetail = findViewById(R.id.productImageDetail);
         ProductNameDetails  = findViewById(R.id.ProductNameDetails);
-        inStockDetails = findViewById(R.id.inStockDetails);
-        productPriceDetails = findViewById(R.id.productPriceDetails);
         shopDetailName = findViewById(R.id.shopDetailName);
         shopDetailPhone = findViewById(R.id.shopDetailPhone);
         mainimage = findViewById(R.id.mainimage);
@@ -112,33 +127,24 @@ public class FullProductView extends AppCompatActivity {
         imageClick4 = findViewById(R.id.imageClick4);
         imageClick5 = findViewById(R.id.imageClick5);
 
-
-
-        favorite = findViewById(R.id.favorite);
-        add_shopping = findViewById(R.id.add_shopping);
-
         shopDetailAddress = findViewById(R.id.shopDetailAddress);
         ProductCode =findViewById(R.id.ProductCode);
-        shareButton =findViewById(R.id.shareButton);
-        reviewID =findViewById(R.id.reviewID);
-        size =findViewById(R.id.size);
+
 
         LigalPrice =findViewById(R.id.LigalPrice);
-        tetViewDiescunt =findViewById(R.id.tetViewDiescunt);
-        sellPrice =findViewById(R.id.sellPrice);
+
+
         ProductDescriptionView =findViewById(R.id.ProductDescriptionView);
 
-        productQuantidyfromCustomer = findViewById(R.id.productQuantidyfromCustomer);
-        orderButton =findViewById(R.id.orderButton);
+
 
         ProductcolorView =findViewById(R.id.ProductcolorView);
         productType =findViewById(R.id.productType);
         ProductSizeView =findViewById(R.id.ProductSizeView);
 
-
-        colorForOrder =findViewById(R.id.colorForOrder);
-        typeforeOrder =findViewById(R.id.typeforeOrder);
-
+        btn_buy_now =findViewById(R.id.btn_buy_now);
+        btn_Add_to_cart =findViewById(R.id.btn_Add_to_cart);
+        btn_add_to_watchlist =findViewById(R.id.btn_add_to_watchlist);
 
         final Bundle bundle = getIntent().getExtras();
 
@@ -146,7 +152,6 @@ public class FullProductView extends AppCompatActivity {
             name = bundle.getString("productName");
             ProductNameDetails.setText(name);
             price = bundle.getString("productPrice");
-            sellPrice.setText(price);
             descripton = bundle.getString("productDescription");
             ProductDescriptionView.setText(descripton);
 
@@ -177,6 +182,28 @@ public class FullProductView extends AppCompatActivity {
 
             }
         }
+
+
+        btn_buy_now.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FullProductView.this, BuyNow.class);
+                startActivity(intent);
+            }
+        });
+        btn_Add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FullProductView.this, "Add to card", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_add_to_watchlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FullProductView.this, "Add to watch list", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         imageClick1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,9 +236,63 @@ public class FullProductView extends AppCompatActivity {
             }
         });
 
-
-
-
         progressDialog.dismiss();
+
+        ShopSearch();
+
+    }
+
+    private void ShopSearch() {
+
+
+      //  Query query1 = GlobleSoplist.orderBy("search").startAt(query.toLowerCase()).endAt(query.toLowerCase()+ "\uf8ff");
+
+        FirestoreRecyclerOptions<ProductNote> options = new FirestoreRecyclerOptions.Builder<ProductNote>()
+                .setQuery(GlobleSoplist, ProductNote.class)
+                .build();
+
+        allProductListAdapter = new AllProductListAdapter(options);
+
+
+        RecyclerView recyclerView = findViewById(R.id.fullProductViewReletetProuct);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        recyclerView.setAdapter(allProductListAdapter);
+        allProductListAdapter.startListening();
+
+        allProductListAdapter.setOnItemClickListener(new AllProductListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                ProductNote productNote = documentSnapshot.toObject(ProductNote.class);
+                Intent intent = new Intent(FullProductView.this, FullProductView.class);
+                intent.putExtra("productName",productNote.getName());
+                intent.putExtra("productPrice",productNote.getPrice()+"");
+                intent.putExtra("productDescription",productNote.getDiscription());
+                intent.putExtra("i1",productNote.getI1());
+                intent.putExtra("i2",productNote.getI2());
+                intent.putExtra("i3",productNote.getI3());
+                intent.putExtra("i4",productNote.getI4());
+                intent.putExtra("i15",productNote.getI15());
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        allProductListAdapter.startListening();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        allProductListAdapter.stopListening();
+
     }
 }

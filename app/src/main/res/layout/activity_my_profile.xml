@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="10dp"
-        android:background="@color/purple_700">
+        android:background="@android:color/darker_gray">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,12 +25,13 @@
                 android:text="My profile "
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/profile_edite"
+                android:id="@+id/profile_edite_pan"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_baseline_edit" />
@@ -69,27 +70,23 @@
             app:civ_border_color="#FF000000"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:baselineAlignBottom="true"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/profile_image_edite"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:src="@drawable/ic_baseline_add_photo_alternate" />
-
-
-
-
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/my_info_View"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:gravity="center"
-            android:fontFamily="serif-monospace"
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +95,6 @@
             android:textSize="20dp" />
         <TextView
             android:gravity="center"
-            android:fontFamily="serif-monospace"
             android:textColor="@color/purple_700"
             android:textSize="20dp"
             android:id="@+id/profile_email"
@@ -107,7 +103,6 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:gravity="center"
-            android:fontFamily="serif-monospace"
             android:textColor="@color/purple_700"
             android:textSize="20dp"
             android:id="@+id/profile_phone"
@@ -117,12 +112,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/my_info_View_edite"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
-
+            android:background="@color/teal_200"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -134,6 +131,7 @@
                 android:id="@+id/profile_Name_Edite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/teal_200"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -143,14 +141,30 @@
             android:layout_marginBottom="12dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:background="@color/teal_200"
             android:hint="Address"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profile_Adress_Edite"
                 android:layout_width="match_parent"
+                android:background="@color/teal_200"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/purple_700"
+            android:text="Saved"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/btn_MY_Profile_Update"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:cornerRadius="1000dp"
+            app:strokeColor="@color/purple_700"/>
     </LinearLayout>
 
 </LinearLayout>

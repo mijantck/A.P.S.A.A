@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         app:titleTextColor="#ffff"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_700">
+        android:background="@android:color/darker_gray">
         <TextView
             android:id="@+id/check"
             android:gravity="center"
@@ -269,8 +269,11 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:text="Product Add"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="1000dp"
+                    app:strokeColor="@color/purple_700"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

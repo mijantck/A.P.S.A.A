@@ -15,8 +15,7 @@
             android:id="@+id/toolbar_support"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/purple_700"
-            >
+            android:background="@android:color/darker_gray">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#FFFF"
@@ -27,20 +26,47 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <LinearLayout
+            android:layout_below="@id/toolbar_support"
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <com.google.android.material.button.MaterialButton
-            android:text=" Product add"
+            android:text="Product add"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_below="@id/toolbar_support"
+            android:textColor="@color/purple_700"
+
             android:id="@+id/productadd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:cornerRadius="1000dp"
+            app:strokeColor="@color/purple_700"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:text="Product add Auctions"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/purple_700"
+            android:layout_below="@id/toolbar_support"
+            android:id="@+id/productaddAuctions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:cornerRadius="1000dp"
+            app:strokeColor="@color/purple_700"/>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="visible"
-            android:layout_below="@+id/productadd"
+            android:layout_below="@+id/buttons"
             android:id="@+id/product_info_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

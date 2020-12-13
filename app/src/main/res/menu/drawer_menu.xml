@@ -14,7 +14,13 @@
             android:title="Order List" />
         <item
             android:id="@+id/Notification"
-            android:title="Notification " />
+            android:title="Notification" />
+        <item
+            android:id="@+id/auctions"
+            android:title="Auctions" />
+        <item
+            android:id="@+id/watchlist"
+            android:title="Watchlist" />
     </group>
     <item android:title="Communicate">
         <menu>

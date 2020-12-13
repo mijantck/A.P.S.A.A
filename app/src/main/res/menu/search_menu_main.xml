@@ -6,4 +6,10 @@
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
+    <item android:id="@+id/Add_to_cart"
+        android:title="searche me "
+        android:icon="@drawable/ic_outline_shopping_cart"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
 </menu>

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.search_menu_main, menu);
 
         MenuItem searchItem = menu.findItem(R.id.search);
+        MenuItem Add_to_cart = menu.findItem(R.id.Add_to_cart);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -158,12 +160,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
+
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Add_to_cart:
+                startActivity(new Intent(MainActivity.this,AddCard.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
     private void ShopSearch(String query) {
-
-
         Query query1 = GlobleSoplist.orderBy("search").startAt(query.toLowerCase()).endAt(query.toLowerCase()+ "\uf8ff");
         FirestoreRecyclerOptions<ProductNote> options = new FirestoreRecyclerOptions.Builder<ProductNote>()
                 .setQuery(query1, ProductNote.class)
@@ -214,6 +229,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 case R.id.my_store:
                 startActivity(new Intent(MainActivity.this, MyStore.class));
+                break;
+            case R.id.auctions:
+                startActivity(new Intent(MainActivity.this, Auctions.class));
+                break;
+            case R.id.watchlist:
+                startActivity(new Intent(MainActivity.this, WatchList.class));
+                break;
+                case R.id.Notification:
+                startActivity(new Intent(MainActivity.this, Notification.class));
                 break;
 
             case R.id.Logout:

@@ -17,7 +17,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.APSAA">
-        <activity android:name=".product.FullProductView"></activity>
+        <activity android:name=".Notification"></activity>
+        <activity android:name=".Auctions" />
+        <activity android:name=".BuyNow" />
+        <activity android:name=".AddCard" />
+        <activity android:name=".WatchList" />
+        <activity android:name=".product.FullProductView" />
         <activity android:name=".product.ProductAddInStore" />
         <activity android:name=".product.MyStore" />
         <activity android:name=".MyProfile" />

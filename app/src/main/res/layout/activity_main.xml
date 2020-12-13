@@ -12,7 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_support"
@@ -21,15 +22,66 @@
             android:elevation="10dp"
             android:background="@android:color/darker_gray">
 
-            <TextView
-                android:textSize="20sp"
-                android:textColor="#fff"
-                android:gravity="center"
-                android:text="Product list  "
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
         </androidx.appcompat.widget.Toolbar>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="7dp">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/purple_700"
+                android:text="Live Auctions"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/btn_Live_Auctions"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:cornerRadius="1000dp"
+                app:strokeColor="@color/purple_700"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/purple_700"
+                android:text="Categories"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/btn_Categories"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:cornerRadius="1000dp"
+                app:strokeColor="@color/purple_700"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/purple_700"
+                    android:text="Saved"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/btn_Saved"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="1000dp"
+                    app:strokeColor="@color/purple_700"/>
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopListRecyrview"
@@ -46,6 +98,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_layout"
+        app:theme="@style/ThemeOverlay.AppCompat.navTheme"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
